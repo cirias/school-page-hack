@@ -101,6 +101,41 @@
           };
         }
 
+        function findMaskThenRemove() {
+          var mainDoc = doc.getElementsByName("main")[0].contentDocument;
+          var mainWin = doc.getElementsByName("main")[0].contentWindow;
+          var removed = {
+            mask: false,
+            msg: false
+          };
+
+          if (mainDoc.getElementsByTagName('body').length === 3) {
+            var html = mainDoc.getElementsByTagName('body')[1].parentNode;
+            var bodyOne = mainDoc.getElementsByTagName('body')[1];
+            var bodyTwo = mainDoc.getElementsByTagName('body')[2];
+            html.removeChild(bodyOne);
+            html.removeChild(bodyTwo);
+
+            mainWin.ms_loadUrl = function(url) {
+              var requset = new mainWin.Ajax.Request(url, {
+                  method: 'post',
+                  onComplete: function(response) {
+                    mainWin.$("ms_view").innerHTML = response.responseText;
+                  }
+                });
+            };
+          } else {
+            setTimeout(findMaskThenRemove, 50);
+          }
+        }
+
+        window.loadPage = function () {
+          window.loadMask("/jxjgl/studentjxj!myScholarship.action","您当前的位置：评优管理>>","奖学金管理","我的奖学金");
+          findMaskThenRemove();
+        };
+
+        document.getElementById('4af8a07a23e0a0820123e0ab2b61000d').childNodes[1].childNodes[1].setAttribute('onclick','loadPage();');
+
         showMessage("Hack success! ");
         closeMask();
       });
