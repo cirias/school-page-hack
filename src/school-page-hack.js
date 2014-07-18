@@ -129,19 +129,34 @@
           }
         }
 
-        window.loadPage = function () {
-          window.loadMask("/jxjgl/studentjxj!myScholarship.action","您当前的位置：评优管理>>","奖学金管理","我的奖学金");
+        window.loadPage = function (type) {
+          switch (type) {
+          case 1:
+            window.loadMask("/jxjgl/studentjxj!myScholarship.action","您当前的位置：评优管理>>","奖学金管理","我的奖学金");
+            break;
+          case 2:
+            window.loadMask("/zxjgl/studentzxj!myScholarship.action","您当前的位置：资助管理>>","助学金管理","我的助学金");
+            break;
+          case 3:
+            window.loadMask("/knsgl/studentkns!myScholarship.action","您当前的位置：资助管理>>","困难生管理","我的困难生");
+            break;
+          case 4:
+            window.loadMask("/jttfsjgl/studentjttfsj!myScholarship.action","您当前的位置：资助管理>>","困难生管理","我的家庭突发事件");
+            break;
+          }
+
           findMaskThenRemove();
         };
 
-        document.getElementById('4af8a07a23e0a0820123e0ab2b61000d').childNodes[1].childNodes[1].setAttribute('onclick','loadPage();');
+        document.getElementById('4af8a07a23e0a0820123e0ab2b61000d').childNodes[1].childNodes[1].setAttribute('onclick','loadPage(1);');
+        document.getElementById('4af8a07923e0e5430123e0fd2bc00026').childNodes[1].childNodes[1].setAttribute('onclick','loadPage(2);');
+        document.getElementById('4af8a07425d9a5980125d9ac4bb30004').childNodes[1].childNodes[1].setAttribute('onclick','loadPage(3);');
+        document.getElementById('4af8a07425d9a5980125d9ac4bb30004').childNodes[3].childNodes[1].setAttribute('onclick','loadPage(4);');
 
         showMessage("Hack success! ");
         closeMask();
       });
     }
   });
-})(document, document.getElementsByName("contents")[0].contentDocument.getElementsByName(
-    "dtbar")[0].contentDocument,
-  document.getElementsByName("contents")[0].contentDocument.getElementsByName(
-    "dtbar")[0].contentWindow);
+})(document, document.getElementsByName("contents")[0].contentDocument.getElementsByName("dtbar")[0].contentDocument,
+  document.getElementsByName("contents")[0].contentDocument.getElementsByName("dtbar")[0].contentWindow);
