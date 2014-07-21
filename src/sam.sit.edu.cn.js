@@ -1,37 +1,10 @@
-(function(doc, document, window) {
-  if (window.hacking) {
-    return;
-  }
-
-  window.hacking = true;
-
+(function(doc, win, document, window) {
   var jsSrc = {
     prototype: 'http://fhc023.github.io/stuff/school-page-hack/prototype.js',
     jquery: 'http://fhc023.github.io/stuff/school-page-hack/jquery-1.3.2.min.js'
   };
 
-  var body = doc.createElement("body");
-  var newMask = doc.createElement("div");
   var head = document.getElementsByTagName("HEAD")[0];
-
-  function openMask() {
-    newMask.id = 'mask';
-    newMask.style.position = "absolute";
-    newMask.style.zIndex = "1";
-    newMask.style.width = doc.body.scrollWidth + "px";
-    newMask.style.height = doc.body.scrollHeight + "px";
-    newMask.style.top = "0px";
-    newMask.style.left = "0px";
-    newMask.style.background = "#000";
-    newMask.style.filter = "alpha(opacity=40)";
-    newMask.style.opacity = "0.40";
-    body.appendChild(newMask);
-    doc.lastChild.appendChild(body);
-  }
-
-  function closeMask() {
-    doc.lastChild.removeChild(body);
-  }
 
   function showMessage(message) {
     window.alert(message);
@@ -61,8 +34,6 @@
     appendJsNode(head, jsName);
     afterLoadJsCode(jsName + '_loaded', timeout, callback);
   }
-
-  openMask();
 
   loadJS(head, 'prototype', 5000, function(err) {
     if (err) {
@@ -153,10 +124,10 @@
         document.getElementById('4af8a07425d9a5980125d9ac4bb30004').childNodes[1].childNodes[1].setAttribute('onclick','loadPage(3);');
         document.getElementById('4af8a07425d9a5980125d9ac4bb30004').childNodes[3].childNodes[1].setAttribute('onclick','loadPage(4);');
 
-        showMessage("Hack success! ");
-        closeMask();
+        showMessage("Success.");
+        win.hacked = true;
       });
     }
   });
-})(document, document.getElementsByName("contents")[0].contentDocument.getElementsByName("dtbar")[0].contentDocument,
+})(document, window, document.getElementsByName("contents")[0].contentDocument.getElementsByName("dtbar")[0].contentDocument,
   document.getElementsByName("contents")[0].contentDocument.getElementsByName("dtbar")[0].contentWindow);

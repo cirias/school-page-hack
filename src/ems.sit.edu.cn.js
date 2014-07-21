@@ -43,5 +43,7 @@
   }
 
   scorePointNode.onclick = rewrite;
+  window.alert("Success.");
+  window.hacked = true;
 
 }(document, window));

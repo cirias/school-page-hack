@@ -11,8 +11,11 @@ module.exports = function(grunt) {
         }
       },
       build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        files: {
+          '../fhc023.github.io/stuff/school-page-hack/ems.sit.edu.cn.min.js': 'src/ems.sit.edu.cn.js',
+          '../fhc023.github.io/stuff/school-page-hack/sam.sit.edu.cn.min.js': 'src/sam.sit.edu.cn.js',
+          'build/include.min.js': 'src/include.js'
+        }
       }
     }
   });
